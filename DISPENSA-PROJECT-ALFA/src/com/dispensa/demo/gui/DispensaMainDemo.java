@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+@Deprecated
 public class DispensaMainDemo {
 	
 	public DispensaMainDemo() {

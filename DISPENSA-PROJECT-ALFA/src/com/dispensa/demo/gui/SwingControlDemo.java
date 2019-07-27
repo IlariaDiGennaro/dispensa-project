@@ -5,7 +5,8 @@ import java.awt.event.*;
 
 import javax.net.ssl.SSLEngineResult.Status;
 import javax.swing.*;
- 
+
+@Deprecated
 public class SwingControlDemo {
    private JFrame mainFrame;
    private JLabel headerLabel;

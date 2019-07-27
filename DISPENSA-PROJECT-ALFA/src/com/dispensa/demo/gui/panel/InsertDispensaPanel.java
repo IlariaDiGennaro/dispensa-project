@@ -15,7 +15,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
 
 import com.dispensa.demo.gui.constant.GuiConstant;
-import com.dispensa.demo.gui.data.service.SizeFilter;
+import com.dispensa.demo.gui.data.service.InputAndSizeFilter;
 
 public class InsertDispensaPanel extends JPanel {
 	
@@ -67,7 +67,7 @@ public class InsertDispensaPanel extends JPanel {
 		barcode = new JTextField(GuiConstant.TEXT_FIELD_SIZE_20);
 		barcode.setFont(GuiConstant.FONT_GUI);
 		panel.add(barcode, gridBagConstraints);
-		((AbstractDocument)barcode.getDocument()).setDocumentFilter(new SizeFilter(13));
+		((AbstractDocument)barcode.getDocument()).setDocumentFilter(new InputAndSizeFilter(13));
 		barcode.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
@@ -75,10 +75,7 @@ public class InsertDispensaPanel extends JPanel {
 				editable = false;
 				marca.setEditable(editable);
 				nome.setEditable(editable);
-				textFieldDAY.setEditable(editable);
-				textFieldMONTH.setEditable(editable);
-				textFieldYEAR.setEditable(editable);
-				quantita.setEditable(editable);
+				setProductInfoEditability(editable);
 			}
 			
 			@Override
@@ -87,21 +84,29 @@ public class InsertDispensaPanel extends JPanel {
 				if(barcode.getText().length() == 13) {
 					System.out.println("STO CERCANDO");
 					
-					if((barcode.getText().equalsIgnoreCase("1234567890123"))){
+					if(barcode.getText().equalsIgnoreCase("1234567890123")){
+						
+						//brand e prodotto trovato
 						editable = false;
 						marca.setEditable(editable);
 						nome.setEditable(editable);
+						
+					} else if (barcode.getText().equalsIgnoreCase("1234567890100")){
+						
+						//brand trovato ma non il prodotto
+						marca.setEditable(false);
+						nome.setEditable(true);
+						
 					}else {
+						
+						//altrimenti
 						editable = true;
 						marca.setEditable(editable);
 						nome.setEditable(editable);
 					}
 					
 					editable = true;
-					textFieldDAY.setEditable(editable);
-					textFieldMONTH.setEditable(editable);
-					textFieldYEAR.setEditable(editable);
-					quantita.setEditable(editable);
+					setProductInfoEditability(editable);
 				}
 			}
 			
@@ -121,6 +126,7 @@ public class InsertDispensaPanel extends JPanel {
 		marca.setEditable(editable);
 		panel.add(marca, gridBagConstraints);
 		
+		//NAME
 		gridBagConstraints.gridx=0;
         gridBagConstraints.gridy++;
         panel.add(createJLabel(GuiConstant.LABEL_NOME), gridBagConstraints);
@@ -133,6 +139,7 @@ public class InsertDispensaPanel extends JPanel {
 		gridBagConstraints.gridx=0;
         gridBagConstraints.gridy++;
         
+        //SCADENZA
         panel.add(createJLabel("SCADENZA : "), gridBagConstraints);
         gridBagConstraints.gridx++;
         
@@ -147,8 +154,8 @@ public class InsertDispensaPanel extends JPanel {
 	        textFieldDAY = new JTextField(2);
 	        textFieldDAY.setFont(GuiConstant.FONT_GUI);
 	        textFieldDAY.setEditable(editable);
-	        
 	        scadenzaPanel.add(textFieldDAY, scadenzaGBC);
+	        ((AbstractDocument)textFieldDAY.getDocument()).setDocumentFilter(new InputAndSizeFilter(2));
 	        scadenzaGBC.gridx++;
 	        scadenzaPanel.add(createJLabel("/"), scadenzaGBC);
 	        scadenzaGBC.gridx++;
@@ -156,6 +163,7 @@ public class InsertDispensaPanel extends JPanel {
 	        textFieldMONTH.setFont(GuiConstant.FONT_GUI);
 	        textFieldMONTH.setEditable(editable);
 	        scadenzaPanel.add(textFieldMONTH, scadenzaGBC);
+	        ((AbstractDocument)textFieldMONTH.getDocument()).setDocumentFilter(new InputAndSizeFilter(2));
 	        scadenzaGBC.gridx++;
 	        scadenzaPanel.add(createJLabel("/"), scadenzaGBC);
 	        scadenzaGBC.gridx++;
@@ -163,6 +171,7 @@ public class InsertDispensaPanel extends JPanel {
 	        textFieldYEAR.setFont(GuiConstant.FONT_GUI);
 	        textFieldYEAR.setEditable(editable);
 	        scadenzaPanel.add(textFieldYEAR, scadenzaGBC);
+	        ((AbstractDocument)textFieldYEAR.getDocument()).setDocumentFilter(new InputAndSizeFilter(4));
 	        
 	    panel.add(scadenzaPanel, gridBagConstraints);
         
@@ -172,13 +181,13 @@ public class InsertDispensaPanel extends JPanel {
         gridBagConstraints.gridy++;
         panel.add(createJLabel(GuiConstant.LABEL_QUANTITA), gridBagConstraints);
         gridBagConstraints.gridx++;
-        quantita = new JTextField(20);
+        quantita = new JTextField(6);
         quantita.setFont(GuiConstant.FONT_GUI);
         quantita.setEditable(editable);
 		panel.add(quantita, gridBagConstraints);
+		((AbstractDocument)quantita.getDocument()).setDocumentFilter(new InputAndSizeFilter(6));
 			
         add(panel);
-//        externalLayout.
 	}
 	
 	private JLabel createJLabel(String labelName) {
@@ -186,5 +195,12 @@ public class InsertDispensaPanel extends JPanel {
         label.setFont(GuiConstant.FONT_GUI);
         return label;
     }
+	
+	private void setProductInfoEditability(boolean editability) {
+		textFieldDAY.setEditable(editable);
+		textFieldMONTH.setEditable(editable);
+		textFieldYEAR.setEditable(editable);
+		quantita.setEditable(editable);
+	}
 
 }
