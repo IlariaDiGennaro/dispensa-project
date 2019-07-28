@@ -20,5 +20,8 @@ public class GuiConstant {
 	public static final String LABEL_SCADENZA = "SCADENZA :";
 	public static final String LABEL_QUANTITA = "QUANTITA' :";
 	
+	// REGEX
+	public static final String REGEX_DAY = "^([0]?[1-9]|[1-2]\\d|[3][0-1])$";
+	
 	
 }

@@ -202,5 +202,12 @@ public class InsertDispensaPanel extends JPanel {
 		textFieldYEAR.setEditable(editable);
 		quantita.setEditable(editable);
 	}
+	
+//	private boolean checkRegex(String str) {
+//    	if (regex == null)
+//    		return true;
+//    	else
+//    		return Pattern.matches(regex, str); 
+//    }
 
 }
