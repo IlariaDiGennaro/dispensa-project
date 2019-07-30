@@ -3,10 +3,11 @@ package com.dispensa.demo.beans;
 public class Barcode {
 
 	private Integer id;
-	private String brand;
+	private String barcode;
+	private String brandCode;
 	private String productCode;
-	private Integer brandId;
-	private Integer productId;
+	private Brand brand;
+	private Product product;
 	
 	public Integer getId() {
 		return id;
@@ -14,11 +15,17 @@ public class Barcode {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getBrand() {
-		return brand;
+	public String getBarcode() {
+		return barcode;
 	}
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
+	public String getBrandCode() {
+		return brandCode;
+	}
+	public void setBrandCode(String brandCode) {
+		this.brandCode = brandCode;
 	}
 	public String getProductCode() {
 		return productCode;
@@ -26,33 +33,34 @@ public class Barcode {
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
-	public Integer getBrandId() {
-		return brandId;
+	public Brand getBrand() {
+		return brand;
 	}
-	public void setBrandId(Integer brandId) {
-		this.brandId = brandId;
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
-	public Integer getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	
 	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Barcode [id=");
 		builder.append(id);
-		builder.append(", brand=");
-		builder.append(brand);
+		builder.append(", barcode=");
+		builder.append(barcode);
+		builder.append(", brandCode=");
+		builder.append(brandCode);
 		builder.append(", productCode=");
 		builder.append(productCode);
-		builder.append(", brandId=");
-		builder.append(brandId);
-		builder.append(", productId=");
-		builder.append(productId);
+		builder.append(", brand=");
+		builder.append(brand.toString());
+		builder.append(", product=");
+		builder.append(product.toString());
 		builder.append("]");
 		return builder.toString();
 	}

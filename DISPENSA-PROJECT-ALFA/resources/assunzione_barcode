@@ -1,0 +1,27 @@
+EAN 13
+L'EAN 13, come suggerisce il nome, rappresenta un codice di 13 caratteri. Usa 3 tipi di codifiche: la codifica A, B e C. 
+Dei 13 caratteri solo 12 sono rappresentati, poiché la prima cifra da sinistra identifica la sequenza di codifiche A o B dei successivi 6 caratteri. 
+Sono presenti inoltre caratteri di start (101), stop (101) e controllo centrale (01010).
+
+Composizione:
+101 (6 caratteri codificati in A o B) 01010 (6 caratteri codificati in C) 101
+
+Il codice stampato deve avere delle ben precise zone di offset e overflow per permetterne la lettura, e in particolare spessore di 1 modulo tra il codice e la fine della targhetta in alto, 
+1 modulo tra la fine dei numeri sotto il codice e la fine della targhetta in basso, 7 moduli tra il codice e il margine destro e 11 moduli per il margine sinistro.
+Per cui un codice EAN 13 sarà costituito in lunghezza da 11+(12*7)+7+3+3+5=113 moduli di cui 95 moduli del codice e 18 di overflow.
+
+
+######################################################################################################################################################################
+EAN 13 viene utilizzato per la marcatura di prodotti destinati al mercato globale:
+
+- le prime due cifre del codice identificano il paese dove è stata richiesta la codifica da chi detiene il marchio del prodotto (per esempio l'Italia è indicata dalle cifre 80 e 81);
+
+- le successive cinque cifre identificano il produttore;
+
+- le ulteriori cinque cifre identificano la denominazione del prodotto all'interno dell'azienda;
+
+- l'ultima cifra rappresenta il cosiddetto "check digit" (codice di controllo), 
+che viene calcolato tramite uno specifico algoritmo: si moltiplicano le prime 12 cifre del codice alternativamente per 1 e per 3, poi si sommano i valori ottenuti; 
+la cifra di controllo è il più piccolo numero da aggiungere a questa somma per ottenere un multiplo di 10. Nell'esempio di codice sopra riportato si calcola 
+nel modo seguente: 2·1 + 4·3 + 1·1 + 2·3 + 3·1 + 4·3 + 5·1 + 6·3 + 7·1 + 8·3 + 9·1 + 0·3 = 99; manca 1 per raggiungere il multiplo della decina superiore più vicino, ossia 100
+######################################################################################################################################################################

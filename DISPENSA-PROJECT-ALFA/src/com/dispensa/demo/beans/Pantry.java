@@ -3,7 +3,7 @@ package com.dispensa.demo.beans;
 public class Pantry {
 
 	private Integer id;
-	private Integer productId;
+	private Product product;
 	private String expirationDate;
 	private Integer quantity;
 	
@@ -13,11 +13,11 @@ public class Pantry {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	public String getExpirationDate() {
 		return expirationDate;
@@ -38,8 +38,8 @@ public class Pantry {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Pantry [id=");
 		builder.append(id);
-		builder.append(", productId=");
-		builder.append(productId);
+		builder.append(", product=");
+		builder.append(product.toString());
 		builder.append(", expirationDate=");
 		builder.append(expirationDate);
 		builder.append(", quantity=");

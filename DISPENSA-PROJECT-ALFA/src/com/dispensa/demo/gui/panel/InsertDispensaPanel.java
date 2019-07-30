@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +15,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
 
+import com.dispensa.demo.beans.response.BrandProduct;
+import com.dispensa.demo.call.ExternalHttpCall;
 import com.dispensa.demo.gui.constant.GuiConstant;
 import com.dispensa.demo.gui.data.service.InputAndSizeFilter;
 
@@ -82,31 +85,29 @@ public class InsertDispensaPanel extends JPanel {
 			public void insertUpdate(DocumentEvent e) {
 				
 				if(barcode.getText().length() == 13) {
-					System.out.println("STO CERCANDO");
+					ExternalHttpCall call = new ExternalHttpCall();
+					try {
+						BrandProduct brandProduct = call.findByBarcode(barcode.getText());
 					
-					if(barcode.getText().equalsIgnoreCase("1234567890123")){
+						if(brandProduct.getBrandName() != null ) {
+							marca.setText(brandProduct.getBrandName().toUpperCase());
+							marca.setEditable(false);
+						} else {
+							marca.setEditable(true);
+						}
 						
-						//brand e prodotto trovato
-						editable = false;
-						marca.setEditable(editable);
-						nome.setEditable(editable);
-						
-					} else if (barcode.getText().equalsIgnoreCase("1234567890100")){
-						
-						//brand trovato ma non il prodotto
-						marca.setEditable(false);
-						nome.setEditable(true);
-						
-					}else {
-						
-						//altrimenti
-						editable = true;
-						marca.setEditable(editable);
-						nome.setEditable(editable);
+						if(brandProduct.getProductName() != null ) {
+							nome.setText(brandProduct.getProductName().toUpperCase());
+							nome.setEditable(false);
+						} else {
+							nome.setEditable(true);
+						}
+					
+						setProductInfoEditability(true);
+					
+					} catch (IOException e1) {
+						System.out.println("Something gone wrong.");
 					}
-					
-					editable = true;
-					setProductInfoEditability(editable);
 				}
 			}
 			
@@ -197,10 +198,10 @@ public class InsertDispensaPanel extends JPanel {
     }
 	
 	private void setProductInfoEditability(boolean editability) {
-		textFieldDAY.setEditable(editable);
-		textFieldMONTH.setEditable(editable);
-		textFieldYEAR.setEditable(editable);
-		quantita.setEditable(editable);
+		textFieldDAY.setEditable(editability);
+		textFieldMONTH.setEditable(editability);
+		textFieldYEAR.setEditable(editability);
+		quantita.setEditable(editability);
 	}
 	
 //	private boolean checkRegex(String str) {
