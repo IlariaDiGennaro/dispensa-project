@@ -79,6 +79,8 @@ public class InsertDispensaPanel extends JPanel {
 				marca.setEditable(editable);
 				nome.setEditable(editable);
 				setProductInfoEditability(editable);
+				marca.setText("");
+				nome.setText("");
 			}
 			
 			@Override
@@ -93,6 +95,7 @@ public class InsertDispensaPanel extends JPanel {
 							marca.setText(brandProduct.getBrandName().toUpperCase());
 							marca.setEditable(false);
 						} else {
+							marca.setText("");
 							marca.setEditable(true);
 						}
 						
@@ -100,6 +103,7 @@ public class InsertDispensaPanel extends JPanel {
 							nome.setText(brandProduct.getProductName().toUpperCase());
 							nome.setEditable(false);
 						} else {
+							nome.setText("");
 							nome.setEditable(true);
 						}
 					
@@ -108,11 +112,21 @@ public class InsertDispensaPanel extends JPanel {
 					} catch (IOException e1) {
 						System.out.println("Something gone wrong.");
 					}
+				} else {
+					marca.setText("");
+					nome.setText("");
 				}
 			}
 			
 			@Override
-			public void changedUpdate(DocumentEvent e) {}
+			public void changedUpdate(DocumentEvent e) {
+				editable = false;
+				marca.setEditable(editable);
+				nome.setEditable(editable);
+				setProductInfoEditability(editable);
+				marca.setText("");
+				nome.setText("");
+			}
 		});
 		// BARCODE section end
 		
